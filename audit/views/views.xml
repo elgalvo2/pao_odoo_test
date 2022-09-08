@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="audit_report_tree" model="ir.ui.view">
+      <field name="name">pao.auditorias_tree</field>
+      <field name="model">pao.auditorias</field>
+      <field name="arch" type="xml">
+        <tree string="audit">
+          <field name="client_id"/>
+          <field name="audit_num"/>
+          <field name="country_id"/>
+        </tree>
+      </field>
+    </record> 
+
+    
+    <record id="audit_report_form" model="ir.ui.view">
+      <field name="name">auditorias_form</field>
+      <field name="model">pao.auditorias</field>
+      <field name="arch" type="xml">
+        <form string="Auditorias" version="7.0">  
+          <sheet>
+            <group> 
+              <field name="audit_num"/>
+              <field name="client_id" options='{"no_open":True}'/>
+              <field name="country_id" options='{"no_open":True}'/>
+              <field name="state_id" domain="[('country_id','=',country_id)]" options='{"no_open":True}'/>
+              <field name="city_id" domain="[('state_id','=',state_id)]"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="audit_action" model="ir.actions.act_window">
+      <field name="name">Audits</field>
+      <field name="res_model">pao.auditorias</field>
+      <field name="view_mode">tree,form</field>
+        
+      <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new sales team
+            </p><p>
+                Use Sales Teams to organize your sales departments.
+                Each team will work with a separate pipeline.
+            </p>
+        </field>
+    </record>
+  </data>
+</odoo>
